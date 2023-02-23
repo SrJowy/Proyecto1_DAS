@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Proyecto1_DAS</string>
+    <string name="sign_in">Iniciar Sesión</string>
+    <string name="user_id">Usuario</string>
+    <string name="pass_id">Contraseña:</string>
+    <string name="accept">Aceptar</string>
+</resources>
