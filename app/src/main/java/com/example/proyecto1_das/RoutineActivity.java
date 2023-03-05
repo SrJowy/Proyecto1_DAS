@@ -2,8 +2,10 @@ package com.example.proyecto1_das;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -27,5 +29,11 @@ public class RoutineActivity extends AppCompatActivity {
 
         ListView lv = findViewById(R.id.lRutinas);
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lRutinas));
+
+        Button b = findViewById(R.id.button2);
+        b.setOnClickListener( c -> {
+            Intent i = new Intent(this, ExerciseActivity.class);
+            startActivity(i);
+        });
     }
 }

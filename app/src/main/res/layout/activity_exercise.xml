@@ -4,38 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoutineActivity">
+    tools:context=".ExerciseActivity">
 
-    <ListView
-        android:id="@+id/lRutinas"
-        android:layout_width="409dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.proyecto1_das.ExerciseFragment"
+        android:layout_width="fill_parent"
         android:layout_height="650dp"
-        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="MissingConstraints"
+        tools:layout="@layout/fragment_exercise_list" />
 
     <TextView
-        android:id="@+id/tv_routines"
+        android:id="@+id/tv_exercises"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_routines"
+        android:text="@string/Exercises"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.735"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.04" />
 </androidx.constraintlayout.widget.ConstraintLayout>
