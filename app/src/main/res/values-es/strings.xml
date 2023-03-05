@@ -5,4 +5,5 @@
     <string name="user_id">Usuario</string>
     <string name="pass_id">Contraseña:</string>
     <string name="accept">Aceptar</string>
+    <string name="main_routines">Rutinas</string>
 </resources>
