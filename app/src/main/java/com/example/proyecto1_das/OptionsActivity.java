@@ -2,10 +2,14 @@ package com.example.proyecto1_das;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.proyecto1_das.dialog.OptionDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +32,9 @@ public class OptionsActivity extends AppCompatActivity {
         lv.setAdapter(a);
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
             if (i == 0) {
-                Log.i("onCreate", "onCreate: HOLA");
+                CharSequence[] options = {getString(R.string.Light), getString(R.string.Dark)};
+                OptionDialog d = new OptionDialog(getString(R.string.msg_theme_title), options, i);
+                d.show(this.getSupportFragmentManager(), "THEME");
             }
         });
 

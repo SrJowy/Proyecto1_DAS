@@ -10,4 +10,7 @@
     <string name="Settings">Settings</string>
     <string name="Language">Language</string>
     <string name="Theme">Theme</string>
+    <string name="msg_theme_title">Choose theme:</string>
+    <string name="Light">Light</string>
+    <string name="Dark">Dark</string>
 </resources>
