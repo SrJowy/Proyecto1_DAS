@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.proyecto1_das.dialog.OptionDialog;
+import com.example.proyecto1_das.preferences.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,12 @@ public class OptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_pref, new Preferences())
+                .commit();
 
-        options = new ArrayList<String>();
+
+        /*options = new ArrayList<String>();
         options.add(getString(R.string.Theme));
         options.add(getString(R.string.Language));
 
@@ -36,7 +41,7 @@ public class OptionsActivity extends AppCompatActivity {
                 OptionDialog d = new OptionDialog(getString(R.string.msg_theme_title), options, i);
                 d.show(this.getSupportFragmentManager(), "THEME");
             }
-        });
+        });*/
 
 
     }

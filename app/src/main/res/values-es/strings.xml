@@ -13,4 +13,5 @@
     <string name="msg_theme_title">Elige el tema:</string>
     <string name="Light">Claro</string>
     <string name="Dark">Oscuro</string>
+    <string name="Exit">Salir</string>
 </resources>

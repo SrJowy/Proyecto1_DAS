@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.proyecto1_das.R;
+
 public class OptionDialog extends DialogFragment {
 
     private String title;
@@ -38,6 +40,21 @@ public class OptionDialog extends DialogFragment {
                 }
             }
         });
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.Exit), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
         return builder.create();
     }
 }

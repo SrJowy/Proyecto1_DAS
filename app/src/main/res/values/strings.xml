@@ -16,5 +16,6 @@
     <string name="msg_theme_title">Choose theme:</string>
     <string name="Light">Light</string>
     <string name="Dark">Dark</string>
+    <string name="Exit">Exit</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
