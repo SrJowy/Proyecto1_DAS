@@ -1,4 +1,4 @@
-package com.example.proyecto1_das;
+package com.example.proyecto1_das.exercises;
 
 import android.util.Log;
 import android.view.View;

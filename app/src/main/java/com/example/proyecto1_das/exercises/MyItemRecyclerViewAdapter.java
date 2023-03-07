@@ -1,4 +1,4 @@
-package com.example.proyecto1_das;
+package com.example.proyecto1_das.exercises;
 
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -10,5 +10,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="main_routines">Routines</string>
     <string name="Exercises">Exercises</string>
+    <string name="Settings">Settings</string>
+    <string name="Language">Language</string>
+    <string name="Theme">Theme</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

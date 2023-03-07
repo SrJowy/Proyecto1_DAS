@@ -6,7 +6,7 @@
     android:id="@+id/my_drawer_layout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseActivity"
+    tools:context=".exercises.ExerciseActivity"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.navigation.NavigationView
@@ -21,12 +21,14 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="com.example.proyecto1_das.ExerciseFragment"
+            android:name="com.example.proyecto1_das.exercises.fragments.ExerciseFragment"
             android:layout_width="fill_parent"
             android:layout_height="650dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout="@layout/fragment_exercise_list" />
 

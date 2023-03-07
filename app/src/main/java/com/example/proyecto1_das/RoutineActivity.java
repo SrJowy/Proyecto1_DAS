@@ -1,21 +1,25 @@
 package com.example.proyecto1_das;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toolbar;
+
+import com.example.proyecto1_das.exercises.ExerciseActivity;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class RoutineActivity extends AppCompatActivity {
+public class RoutineActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ArrayList<String> lRutinas;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -49,14 +53,29 @@ public class RoutineActivity extends AppCompatActivity {
             Intent i = new Intent(this, ExerciseActivity.class);
             startActivity(i);
         });
+
+        NavigationView n = findViewById(R.id.nav_menu);
+        n.bringToFront();
+        n.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            Log.i("ELEM", "item: " + item);
             return true;
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (R.id.nav_settings == item.getItemId()) {
+            Intent i = new Intent(this, OptionsActivity.class);
+            startActivity(i);
+        }
+        return true;
     }
 }
