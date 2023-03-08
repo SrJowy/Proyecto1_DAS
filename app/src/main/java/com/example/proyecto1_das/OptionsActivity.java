@@ -3,7 +3,10 @@ package com.example.proyecto1_das;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -14,10 +17,9 @@ import com.example.proyecto1_das.preferences.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class OptionsActivity extends AppCompatActivity {
-
-    private List<String> options;
+public class OptionsActivity extends AppCompatActivity implements Preferences.PrefListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +28,29 @@ public class OptionsActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_pref, new Preferences())
                 .commit();
+    }
 
+    @Override
+    public void changeLang(String lang) {
+        Locale newLoc = new Locale(lang);
+        Locale.setDefault(newLoc);
 
-        /*options = new ArrayList<String>();
-        options.add(getString(R.string.Theme));
-        options.add(getString(R.string.Language));
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.setLocale(newLoc);
+        configuration.setLayoutDirection(newLoc);
 
-        ListView lv = findViewById(R.id.lOptions);
-        ArrayAdapter a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options);
-        lv.setAdapter(a);
-        lv.setOnItemClickListener((adapterView, view, i, l) -> {
-            if (i == 0) {
-                CharSequence[] options = {getString(R.string.Light), getString(R.string.Dark)};
-                OptionDialog d = new OptionDialog(getString(R.string.msg_theme_title), options, i);
-                d.show(this.getSupportFragmentManager(), "THEME");
-            }
-        });*/
+        Context context =
+                getBaseContext().createConfigurationContext(configuration);
+        getBaseContext().getResources().updateConfiguration(configuration,
+                context.getResources().getDisplayMetrics());
 
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void changeTheme() {
 
     }
 }

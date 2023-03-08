@@ -1,6 +1,8 @@
 package com.example.proyecto1_das.preferences;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +15,25 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.proyecto1_das.R;
 
+import java.util.Locale;
+
 public class Preferences extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    public interface PrefListener {
+        void changeLang(String lang);
+        void changeTheme();
+    }
+
+    private PrefListener prefListener;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        prefListener = (PrefListener) context;
+    }
+
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         addPreferencesFromResource(R.xml.pref_config);
@@ -24,10 +43,10 @@ public class Preferences extends PreferenceFragmentCompat
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         switch (s) {
             case "theme":
-                Log.i("THEME", "onSharedPreferenceChanged: ");
+                prefListener.changeTheme();
                 break;
             case "lang":
-                Log.i("LANG", "lang");
+                prefListener.changeLang(sharedPreferences.getString(s,"en"));
                 break;
         }
     }

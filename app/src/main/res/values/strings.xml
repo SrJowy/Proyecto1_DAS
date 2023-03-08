@@ -17,5 +17,7 @@
     <string name="Light">Light</string>
     <string name="Dark">Dark</string>
     <string name="Exit">Exit</string>
+    <string name="home">Home</string>
+    <string name="Logout">Logout</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
