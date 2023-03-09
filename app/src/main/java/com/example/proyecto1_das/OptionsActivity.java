@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class OptionsActivity extends AppCompatActivity implements Preferences.PrefListener{
+public class OptionsActivity extends AppCompatActivity implements Preferences.PrefListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

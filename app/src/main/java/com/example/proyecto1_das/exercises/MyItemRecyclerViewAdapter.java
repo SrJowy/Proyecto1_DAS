@@ -1,5 +1,6 @@
 package com.example.proyecto1_das.exercises;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder
         mValues = items;
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(

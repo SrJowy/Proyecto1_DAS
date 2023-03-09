@@ -29,7 +29,7 @@ public class ExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
-
+        //TODO: ADD DB CONNECTION FOR RETRIEVING EXERCISE DATA
         List<Exercise> lExercises = new ArrayList<Exercise>();
         Exercise e1 = new Exercise("1", "Press de banca", "des1", 4, 12, 100.0);
         lExercises.add(e1);

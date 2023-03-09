@@ -15,7 +15,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             void selectItem(String data);
         }
 
-        private listenerViewHolder listener;
+        private final listenerViewHolder listener;
 
         public final TextView mIdView;
         public final TextView mContentView;
@@ -25,26 +25,20 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         public MyViewHolder(FragmentExerciseBinding binding) {
             super(binding.getRoot());
             listener = (listenerViewHolder) binding.getRoot().getContext();
-            Log.i("LISTA", "MyViewHolder: " + listener);
             mIdView = binding.itemNumber;
             mContentView = binding.content;
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (selected[getAbsoluteAdapterPosition()] == true) {
+                    if (selected[getAbsoluteAdapterPosition()]) {
                         selected[getAbsoluteAdapterPosition()] = false;
 
                     } else {
                         selected[getAbsoluteAdapterPosition()] = true;
-                        Log.i("LISTA", "onClick: Se ha pulsado " + mContentView.getText());
                         listener.selectItem(mItem.getDes());
                     }
                 }
             });
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
 }
