@@ -12,10 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.proyecto1_das.R;
+import com.example.proyecto1_das.data.Exercise;
+import com.example.proyecto1_das.db.MyDB;
+
+import java.util.List;
 
 public class ExerciseDataFragment extends Fragment {
 
-    private String data;
+    private int exID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,16 +35,50 @@ public class ExerciseDataFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView tv = getView().findViewById(R.id.tv_data);
-        tv.setText(data);
+        MyDB myDB = new MyDB(getContext());
+        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID);
+        if (!lEx.isEmpty()) {
+            Exercise e = lEx.get(0);
+            TextView tExName = getView().findViewById(R.id.exName);
+            tExName.setText(e.getName());
+
+            TextView tExDesc = getView().findViewById(R.id.exDesc);
+            tExDesc.setText(e.getDes());
+
+            TextView tNumSeries = getView().findViewById(R.id.numSeriesData);
+            tNumSeries.setText(Integer.toString(e.getNumSeries()));
+
+            TextView tNumReps = getView().findViewById(R.id.numRepsData);
+            tNumReps.setText(Integer.toString(e.getNumReps()));
+
+            TextView tKgs = getView().findViewById(R.id.exKGs);
+            tKgs.setText(Double.toString(e.getNumKgs()));
+        }
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(int exID) {
+        this.exID = exID;
     }
 
-    public void setData2(String data) {
-        TextView tv = getView().findViewById(R.id.tv_data);
-        tv.setText(data);
+    public void setData2(int exID) {
+        MyDB myDB = new MyDB(getContext());
+        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID);
+        if (!lEx.isEmpty()) {
+            Exercise e = lEx.get(0);
+            TextView tExName = getView().findViewById(R.id.exName);
+            tExName.setText(e.getName());
+
+            TextView tExDesc = getView().findViewById(R.id.exDesc);
+            tExDesc.setText(e.getDes());
+
+            TextView tNumSeries = getView().findViewById(R.id.numSeriesData);
+            tNumSeries.setText(Integer.toString(e.getNumSeries()));
+
+            TextView tNumReps = getView().findViewById(R.id.numRepsData);
+            tNumReps.setText(Integer.toString(e.getNumReps()));
+
+            TextView tKgs = getView().findViewById(R.id.exKGs);
+            tKgs.setText(Double.toString(e.getNumKgs()));
+        }
     }
 }

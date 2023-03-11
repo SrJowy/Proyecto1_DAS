@@ -10,7 +10,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.proyecto1_das.R;
+import com.example.proyecto1_das.data.Exercise;
 import com.example.proyecto1_das.exercises.fragments.ExerciseDataFragment;
+import com.example.proyecto1_das.exercises.fragments.ExerciseFragment;
+import com.example.proyecto1_das.preferences.Preferences;
+import com.example.proyecto1_das.utils.LocaleUtils;
 
 public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.listenerViewHolder {
 
@@ -19,7 +23,20 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleUtils.initialize(getBaseContext());
         setContentView(R.layout.activity_exercise);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String rId = bundle.getString("RID");
+            Bundle b = new Bundle();
+            b.putString("RID", rId);
+            ExerciseFragment eFrag = new ExerciseFragment();
+            eFrag.setArguments(b);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, eFrag)
+                    .commit();
+        }
 
         DrawerLayout d = findViewById(R.id.my_drawer_layout2);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
@@ -31,15 +48,15 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
     }
 
     @Override
-    public void selectItem(String data) {
+    public void selectItem(int exID) {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             ExerciseDataFragment eFragment = (ExerciseDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragmentContainerView3);
-            eFragment.setData2(data);
+            eFragment.setData2(exID);
         } else {
             Intent i = new Intent(this, ExerciseDataActivity.class);
-            i.putExtra("content", data);
+            i.putExtra("ExID", exID);
             startActivity(i);
         }
     }

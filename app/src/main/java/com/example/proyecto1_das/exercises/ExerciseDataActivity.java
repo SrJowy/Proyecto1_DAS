@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.exercises.fragments.ExerciseDataFragment;
+import com.example.proyecto1_das.utils.LocaleUtils;
 
 public class ExerciseDataActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class ExerciseDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleUtils.initialize(getBaseContext());
         setContentView(R.layout.activity_exercise_data);
 
         DrawerLayout d = findViewById(R.id.my_drawer_layout3);
@@ -29,12 +31,12 @@ public class ExerciseDataActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String data = extras.getString("content");
+            int exID = extras.getInt("ExID");
 
             ExerciseDataFragment eFragment = (ExerciseDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragmentContainerView2);
 
-            eFragment.setData(data);
+            eFragment.setData(exID);
         }
 
     }

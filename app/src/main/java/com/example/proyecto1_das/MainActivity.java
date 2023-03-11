@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.utils.FileUtils;
+import com.example.proyecto1_das.utils.LocaleUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MyDB dbManager = new MyDB(this);
         dbManager.insertUsr("joelbraortiz@gmail.com", "12345");
+        dbManager.insertExercises("Press de banca", "", 4, 12, 60.0, "");
+        dbManager.insertExercises("Tríceps con cuerda", "Realízalo con una polea", 4, 12, 15, "");
+        dbManager.insertExercises("Press de banca inclinado 45º", "Lo puedes hacer con barra o mancuernas", 4, 10, 15, "");
+        dbManager.insertRoutine("joelbraortiz@gmail.com", "Rutina de empuje");
+        dbManager.insertEjRoutine(1,1);
+        dbManager.insertEjRoutine(1,2);
+        dbManager.insertEjRoutine(1,2);
+
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {
             dbManager.close();
@@ -43,20 +52,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        SharedPreferences sharedPreferences = getSharedPreferences("com.example.proyecto1_das_preferences",
-                Context.MODE_PRIVATE);
-
-        Locale newLoc = new Locale(sharedPreferences.getString("lang","en"));
-        Locale.setDefault(newLoc);
-
-        Configuration configuration = getBaseContext().getResources().getConfiguration();
-        configuration.setLocale(newLoc);
-        configuration.setLayoutDirection(newLoc);
-
-        Context context =
-                getBaseContext().createConfigurationContext(configuration);
-        getBaseContext().getResources().updateConfiguration(configuration,
-                context.getResources().getDisplayMetrics());
+        LocaleUtils.initialize(getBaseContext());
         setContentView(R.layout.activity_main);
 
         Button bSignIn = findViewById(R.id.button);

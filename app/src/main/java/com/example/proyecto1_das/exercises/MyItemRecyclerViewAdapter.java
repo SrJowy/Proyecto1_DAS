@@ -3,6 +3,7 @@ package com.example.proyecto1_das.exercises;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -33,7 +34,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId());
+        holder.mIdView.setText(Integer.toString(mValues.get(position).getId()));
         holder.mContentView.setText(mValues.get(position).getName());
         holder.selected = selected;
     }

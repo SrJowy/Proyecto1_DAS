@@ -12,7 +12,7 @@ import com.example.proyecto1_das.databinding.FragmentExerciseBinding;
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public interface listenerViewHolder {
-            void selectItem(String data);
+            void selectItem(int exID);
         }
 
         private final listenerViewHolder listener;
@@ -27,16 +27,13 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             listener = (listenerViewHolder) binding.getRoot().getContext();
             mIdView = binding.itemNumber;
             mContentView = binding.content;
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (selected[getAbsoluteAdapterPosition()]) {
-                        selected[getAbsoluteAdapterPosition()] = false;
+            binding.getRoot().setOnClickListener(view -> {
+                if (selected[getAbsoluteAdapterPosition()]) {
+                    selected[getAbsoluteAdapterPosition()] = false;
 
-                    } else {
-                        selected[getAbsoluteAdapterPosition()] = true;
-                        listener.selectItem(mItem.getDes());
-                    }
+                } else {
+                    selected[getAbsoluteAdapterPosition()] = true;
+                    listener.selectItem(mItem.getId());
                 }
             });
         }

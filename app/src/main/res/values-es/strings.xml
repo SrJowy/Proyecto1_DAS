@@ -16,4 +16,6 @@
     <string name="Exit">Salir</string>
     <string name="home">Inicio</string>
     <string name="Logout">Cerrar sesión</string>
+    <string name="num_reps">Num repes:</string>
+    <string name="num_series">Num series:</string>
 </resources>

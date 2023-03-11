@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.example.proyecto1_das.dialog.OptionDialog;
 import com.example.proyecto1_das.preferences.Preferences;
+import com.example.proyecto1_das.utils.LocaleUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleUtils.initialize(getBaseContext());
         setContentView(R.layout.activity_options);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_pref, new Preferences())
@@ -51,18 +53,6 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
 
     @Override
     public void changeLang(String lang) {
-        Locale newLoc = new Locale(lang);
-        Locale.setDefault(newLoc);
-
-        Configuration configuration = getBaseContext().getResources().getConfiguration();
-        configuration.setLocale(newLoc);
-        configuration.setLayoutDirection(newLoc);
-
-        Context context =
-                getBaseContext().createConfigurationContext(configuration);
-        getBaseContext().getResources().updateConfiguration(configuration,
-                context.getResources().getDisplayMetrics());
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

@@ -1,12 +1,18 @@
 package com.example.proyecto1_das;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,10 +22,12 @@ import com.example.proyecto1_das.data.Routine;
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.exercises.ExerciseActivity;
 import com.example.proyecto1_das.utils.FileUtils;
+import com.example.proyecto1_das.utils.LocaleUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RoutineActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +37,9 @@ public class RoutineActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocaleUtils.initialize(getBaseContext());
+
         setContentView(R.layout.activity_routine);
         FileUtils fUtils = new FileUtils();
         String mail = fUtils.readFile(getApplicationContext(), "config.txt");

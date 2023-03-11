@@ -19,5 +19,8 @@
     <string name="Exit">Exit</string>
     <string name="home">Home</string>
     <string name="Logout">Logout</string>
+    <string name="num_reps">Num reps:</string>
+    <string name="num_series">Num series:</string>
+    <string name="kgs" translatable="false">KGs:</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

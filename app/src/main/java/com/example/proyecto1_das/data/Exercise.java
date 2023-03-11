@@ -1,23 +1,15 @@
 package com.example.proyecto1_das.data;
 
 public class Exercise {
-    private String id;
+    private int id;
     private String name;
     private String des;
     private Integer numSeries;
     private Integer numReps;
     private Double kg;
+    private String link;
 
-    public Exercise(String id, String name, String des, Integer numSeries, Integer numReps, Double numKgs) {
-        this.id = id;
-        this.name = name;
-        this.des = des;
-        this.numSeries = numSeries;
-        this.numReps = numReps;
-        this.kg = numKgs;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -41,7 +33,9 @@ public class Exercise {
         return kg;
     }
 
-    public void setId(String id) {
+    public String getLink() { return link; }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -64,4 +58,6 @@ public class Exercise {
     public void setNumKgs(Double kgs) {
         this.kg = kgs;
     }
+
+    public void setLink(String link) { this.link = link; }
 }

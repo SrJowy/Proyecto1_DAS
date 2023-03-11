@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.data.Exercise;
+import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.exercises.MyItemRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -29,10 +30,17 @@ public class ExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
-        //TODO: ADD DB CONNECTION FOR RETRIEVING EXERCISE DATA
-        List<Exercise> lExercises = new ArrayList<Exercise>();
-        Exercise e1 = new Exercise("1", "Press de banca", "des1", 4, 12, 100.0);
-        lExercises.add(e1);
+
+        String rId = "";
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            rId = bundle.getString("RID");
+        }
+
+        MyDB myDB = new MyDB(getContext());
+        List<Exercise> lExercises = myDB.selectExercisesByRoutineID(rId);
+        myDB.close();
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
