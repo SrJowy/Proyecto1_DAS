@@ -168,4 +168,16 @@ public class MyDB extends SQLiteOpenHelper {
         db.close();
         return lEx;
     }
+
+    public void removeRoutine(String mail, String desc) {
+        Log.i("TAG", "removeRoutine: " + mail + " " + desc);
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "DELETE FROM ROUTINES WHERE MAIL = ? AND DESCRIPTION = ?";
+        try {
+            db.execSQL(sql, new Object[]{mail, desc});
+        } catch (SQLException e) {
+            Log.e("ERROR_REMOVE", "removeRoutine: Couldn't remove that routine ", e);
+        }
+        db.close();
+    }
 }

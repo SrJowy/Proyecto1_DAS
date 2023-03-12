@@ -1,13 +1,19 @@
 package com.example.proyecto1_das;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -43,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         dbManager.insertEjRoutine(1,1);
         dbManager.insertEjRoutine(1,2);
         dbManager.insertEjRoutine(1,3);*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Log.i("and", "onCreate: 1" );
+            if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                Log.i("and", "onCreate: 2" );
+                ActivityCompat.requestPermissions(this, new
+                        String[]{POST_NOTIFICATIONS}, 11);
+            }
+        }
+
 
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {

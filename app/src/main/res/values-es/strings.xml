@@ -19,4 +19,12 @@
     <string name="num_reps">Num repes:</string>
     <string name="num_series">Num series:</string>
     <string name="more_info">Más info</string>
+    <string name="add_routine">Añadir nueva rutina</string>
+    <string name="routine_name">Nombre de la rutina</string>
+    <string name="routine_des">Routine description</string>
+    <string name="save">Guardar</string>
+    <string name="val_error">Nombre inválido</string>
+    <string name="do_action_menu">Menú acción</string>
+    <string name="remove">Eliminar</string>
+    <string name="exit">SALIR</string>
 </resources>
