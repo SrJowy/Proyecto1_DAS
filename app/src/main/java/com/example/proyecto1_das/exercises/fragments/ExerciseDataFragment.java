@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.proyecto1_das.R;
@@ -53,6 +55,8 @@ public class ExerciseDataFragment extends Fragment {
 
             TextView tKgs = getView().findViewById(R.id.exKGs);
             tKgs.setText(Double.toString(e.getNumKgs()));
+
+            setImage(exID);
         }
     }
 
@@ -63,6 +67,7 @@ public class ExerciseDataFragment extends Fragment {
     public void setData2(int exID) {
         MyDB myDB = new MyDB(getContext());
         List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID);
+        Log.i("EDF", "setData2: " + exID);
         if (!lEx.isEmpty()) {
             Exercise e = lEx.get(0);
             TextView tExName = getView().findViewById(R.id.exName);
@@ -79,6 +84,28 @@ public class ExerciseDataFragment extends Fragment {
 
             TextView tKgs = getView().findViewById(R.id.exKGs);
             tKgs.setText(Double.toString(e.getNumKgs()));
+
+            setImage(exID);
         }
+    }
+
+    private void setImage(int id) {
+        ImageView iv = getView().findViewById(R.id.imageView);
+        switch (id) {
+            case 1: {
+                iv.setImageResource(R.drawable.benchpress);
+                break;
+            }
+            case 2: {
+                iv.setImageResource(R.drawable.tricepspolea);
+                break;
+            }
+            case 3: {
+                iv.setImageResource(R.drawable.pressinclinado);
+                break;
+            }
+
+        }
+
     }
 }

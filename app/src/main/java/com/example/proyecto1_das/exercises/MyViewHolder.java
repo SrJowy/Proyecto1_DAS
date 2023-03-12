@@ -28,11 +28,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             mIdView = binding.itemNumber;
             mContentView = binding.content;
             binding.getRoot().setOnClickListener(view -> {
-                if (selected[getAbsoluteAdapterPosition()]) {
-                    selected[getAbsoluteAdapterPosition()] = false;
-
-                } else {
-                    selected[getAbsoluteAdapterPosition()] = true;
+                if (!selected[getAbsoluteAdapterPosition()]) {
                     listener.selectItem(mItem.getId());
                 }
             });

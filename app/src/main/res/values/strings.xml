@@ -22,5 +22,6 @@
     <string name="num_reps">Num reps:</string>
     <string name="num_series">Num series:</string>
     <string name="kgs" translatable="false">KGs:</string>
+    <string name="more_info">More info</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

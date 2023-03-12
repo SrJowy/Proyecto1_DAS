@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu" />
+        app:menu="@menu/navigation_menu"
+        android:id="@+id/nav_menu" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="com.example.proyecto1_das.exercises.fragments.ExerciseFragment"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="340dp"
             android:layout_marginTop="72dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,13 +47,12 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView3"
             android:name="com.example.proyecto1_das.exercises.fragments.ExerciseDataFragment"
-            android:layout_width="430dp"
-            android:layout_height="340dp"
-            android:layout_marginStart="300dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             tools:layout="@layout/fragment_exercise_data" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyDB dbManager = new MyDB(this);
-        dbManager.insertUsr("joelbraortiz@gmail.com", "12345");
+        /*dbManager.insertUsr("joelbraortiz@gmail.com", "12345");
         dbManager.insertExercises("Press de banca", "", 4, 12, 60.0, "");
         dbManager.insertExercises("Tríceps con cuerda", "Realízalo con una polea", 4, 12, 15, "");
         dbManager.insertExercises("Press de banca inclinado 45º", "Lo puedes hacer con barra o mancuernas", 4, 10, 15, "");
         dbManager.insertRoutine("joelbraortiz@gmail.com", "Rutina de empuje");
         dbManager.insertEjRoutine(1,1);
         dbManager.insertEjRoutine(1,2);
-        dbManager.insertEjRoutine(1,2);
+        dbManager.insertEjRoutine(1,3);*/
 
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {

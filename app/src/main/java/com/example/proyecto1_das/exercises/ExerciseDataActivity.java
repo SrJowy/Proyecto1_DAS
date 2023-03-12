@@ -1,17 +1,22 @@
 package com.example.proyecto1_das.exercises;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.proyecto1_das.MainActivity;
+import com.example.proyecto1_das.OptionsActivity;
 import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.exercises.fragments.ExerciseDataFragment;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.google.android.material.navigation.NavigationView;
 
-public class ExerciseDataActivity extends AppCompatActivity {
+public class ExerciseDataActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -39,6 +44,10 @@ public class ExerciseDataActivity extends AppCompatActivity {
             eFragment.setData(exID);
         }
 
+        NavigationView n = findViewById(R.id.nav_menu);
+        n.bringToFront();
+        n.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -48,5 +57,22 @@ public class ExerciseDataActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (R.id.nav_settings == item.getItemId()) {
+            Intent i = new Intent(this, OptionsActivity.class);
+            startActivity(i);
+        } else if (R.id.nav_logout == item.getItemId()) {
+            boolean success = deleteFile("config.txt");
+
+            if (success) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        }
+        return true;
     }
 }
