@@ -1,28 +1,36 @@
 package com.example.proyecto1_das.exercises;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.proyecto1_das.MainActivity;
 import com.example.proyecto1_das.OptionsActivity;
 import com.example.proyecto1_das.R;
-import com.example.proyecto1_das.data.Exercise;
+import com.example.proyecto1_das.dialog.OptionDialog;
 import com.example.proyecto1_das.exercises.fragments.ExerciseDataFragment;
 import com.example.proyecto1_das.exercises.fragments.ExerciseFragment;
-import com.example.proyecto1_das.preferences.Preferences;
+import com.example.proyecto1_das.utils.FileUtils;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.listenerViewHolder, NavigationView.OnNavigationItemSelectedListener {
+public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.listenerViewHolder,
+        NavigationView.OnNavigationItemSelectedListener, OptionDialog.DialogListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private String rID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +40,9 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String rId = bundle.getString("RID");
+            rID = bundle.getString("RID");
             Bundle b = new Bundle();
-            b.putString("RID", rId);
+            b.putString("RID", rID);
             ExerciseFragment eFrag = new ExerciseFragment();
             eFrag.setArguments(b);
             getSupportFragmentManager().beginTransaction()
@@ -60,6 +68,32 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
         NavigationView n = findViewById(R.id.nav_menu);
         n.bringToFront();
         n.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton fButton = findViewById(R.id.floating_button);
+        fButton.setOnClickListener(c -> {
+            Intent i = new Intent(this, AddExerciseActivity.class);
+            i.putExtra("RID", rID);
+            activityResultLauncher.launch(i);
+        });
+    }
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    reloadFragment();
+                }
+            }
+    );
+
+    private void reloadFragment() {
+        ExerciseFragment eFragment = new ExerciseFragment();
+        Bundle b = new Bundle();
+        b.putString("RID", rID);
+        eFragment.setArguments(b);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, eFragment)
+                .commit();
     }
 
     @Override
@@ -77,6 +111,15 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
             i.putExtra("ExID", exID);
             startActivity(i);
         }
+    }
+
+    @Override
+    public void showActivityInfo(int exID) {
+        CharSequence[] options = {getString(R.string.remove)};
+        String[] args = {rID, Integer.toString(exID)};
+        OptionDialog dialogOption = new OptionDialog(getString(R.string.do_action_menu),options, 1, false, args);
+        dialogOption.setListener(this);
+        dialogOption.show(getSupportFragmentManager(), "dialogExercise");
     }
 
     @Override
@@ -98,10 +141,17 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
 
             if (success) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }
         return true;
+    }
+
+    @Override
+    public void onDialogRes(String res) {
+        if (res.equals("00")) {
+            reloadFragment();
+        }
     }
 }

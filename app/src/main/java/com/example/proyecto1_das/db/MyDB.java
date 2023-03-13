@@ -25,7 +25,7 @@ public class MyDB extends SQLiteOpenHelper {
             "CREATE TABLE USERS ('MAIL' VARCHAR(255) PRIMARY KEY NOT NULL, 'PASSWORD' VARCHAR(255))";
 
     private static final String SQL_CREATE_TABLE_EX =
-            "CREATE TABLE EXERCISES (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,NAME TEXT,DES TEXT,NUM_SERIES INTEGER,NUM_REPS INTEGER,KG REAL,LINK TEXT)";
+            "CREATE TABLE EXERCISES (ID INTEGER NOT NULL,NAME TEXT,DES TEXT,NUM_SERIES INTEGER,NUM_REPS INTEGER,KG REAL,LINK TEXT, LANG VARCHAR(2), PRIMARY KEY(ID, NAME))";
 
     private static final String SQL_CREATE_TABLE_EJS_ROUT =
             "CREATE TABLE ROUTINE_EXERCISE (ID_ROUT INTEGER, ID_EJ INTEGER,PRIMARY KEY (ID_ROUT, ID_EJ), FOREIGN KEY (ID_ROUT) REFERENCES ROUTINES(ID), FOREIGN KEY (ID_EJ) REFERENCES EXERCISES(ID))";
@@ -68,11 +68,11 @@ public class MyDB extends SQLiteOpenHelper {
         }
         db.close();
     }
-    public void insertExercises(String name, String des, int numSeries, int numReps, double kg, String link) {
+    public void insertExercises(int id, String name, String des, int numSeries, int numReps, double kg, String link, String lang) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO EXERCISES (NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO EXERCISES (ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            db.execSQL(sql, new Object[]{name, des, numSeries, numReps, kg, link});
+            db.execSQL(sql, new Object[]{id, name, des, numSeries, numReps, kg, link, lang});
         } catch (SQLException e) {
             Log.e("INSERT_ERROR", "insertExercises: Already exists ", e);
         }
@@ -123,10 +123,12 @@ public class MyDB extends SQLiteOpenHelper {
     }
 
 
-    public List<Exercise> selectExercisesByRoutineID(String idRoutine) {
+    public List<Exercise> selectExercisesByRoutineID(String idRoutine, String lang) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT e.ID, e.NAME, e.DES, e.NUM_SERIES, e.NUM_REPS, e.KG, e.LINK FROM EXERCISES e INNER JOIN ROUTINE_EXERCISE re ON e.ID = re.ID_EJ WHERE re.ID_ROUT = ?";;
-        Cursor cursor = db.rawQuery(query, new String[]{idRoutine});
+        String query = "SELECT e.ID, e.NAME, e.DES, e.NUM_SERIES, e.NUM_REPS, e.KG, e.LINK " +
+                "FROM EXERCISES e INNER JOIN ROUTINE_EXERCISE re ON e.ID = re.ID_EJ " +
+                "WHERE re.ID_ROUT = ? AND e.LANG = ?";;
+        Cursor cursor = db.rawQuery(query, new String[]{idRoutine, lang});
 
         List<Exercise> lEx = new ArrayList<>();
 
@@ -146,10 +148,11 @@ public class MyDB extends SQLiteOpenHelper {
         return lEx;
     }
 
-    public List<Exercise> selectExerciseByExerciseID(int idEx) {
+    public List<Exercise> selectExerciseByExerciseID(int idEx, String lang) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK FROM EXERCISES WHERE ID = ?";;
-        Cursor cursor = db.rawQuery(query, new String[]{Integer.toString(idEx)});
+        String query = "SELECT ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK FROM EXERCISES " +
+                "WHERE ID = ? AND LANG = ?";;
+        Cursor cursor = db.rawQuery(query, new String[]{Integer.toString(idEx), lang});
 
         List<Exercise> lEx = new ArrayList<>();
 
@@ -170,7 +173,6 @@ public class MyDB extends SQLiteOpenHelper {
     }
 
     public void removeRoutine(String mail, String desc) {
-        Log.i("TAG", "removeRoutine: " + mail + " " + desc);
         SQLiteDatabase db = getWritableDatabase();
         String sql = "DELETE FROM ROUTINES WHERE MAIL = ? AND DESCRIPTION = ?";
         try {
@@ -180,4 +182,40 @@ public class MyDB extends SQLiteOpenHelper {
         }
         db.close();
     }
+
+    public void removeRoutineEx(int rID, int exID) {
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "DELETE FROM ROUTINE_EXERCISE WHERE ID_ROUT = ? AND ID_EJ = ?";
+        try {
+            db.execSQL(sql, new Object[]{rID, exID});
+        } catch (SQLException e) {
+            Log.e("ERROR_REMOVE", "removeRoutine: Couldn't remove that routine ", e);
+        }
+        db.close();
+    }
+
+    public List<Exercise> selectAllExercises(String lang) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK FROM EXERCISES " +
+                "WHERE LANG = ?";;
+        Cursor cursor = db.rawQuery(query, new String[]{lang});
+
+        List<Exercise> lEx = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            Exercise e = new Exercise();
+            e.setId(cursor.getInt(0));
+            e.setName(cursor.getString(1));
+            e.setDes(cursor.getString(2));
+            e.setNumSeries(cursor.getInt(3));
+            e.setNumReps(cursor.getInt(4));
+            e.setNumKgs(cursor.getDouble(5));
+            e.setLink(cursor.getString(6));
+            lEx.add(e);
+        }
+        cursor.close();
+        db.close();
+        return lEx;
+    }
+
 }

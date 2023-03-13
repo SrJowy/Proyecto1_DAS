@@ -23,4 +23,10 @@ public class LocaleUtils {
         context.getResources().updateConfiguration(configuration,
                 nContext.getResources().getDisplayMetrics());
     }
+
+    public static String getLanguage(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.proyecto1_das_preferences",
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getString("lang","en");
+    }
 }

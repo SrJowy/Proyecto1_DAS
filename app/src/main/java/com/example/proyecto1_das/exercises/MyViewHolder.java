@@ -13,6 +13,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public interface listenerViewHolder {
             void selectItem(int exID);
+            void showActivityInfo(int exID);
         }
 
         private final listenerViewHolder listener;
@@ -31,6 +32,11 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 if (!selected[getAbsoluteAdapterPosition()]) {
                     listener.selectItem(mItem.getId());
                 }
+            });
+
+            binding.getRoot().setOnLongClickListener(view -> {
+                listener.showActivityInfo(mItem.getId());
+                return true;
             });
         }
 

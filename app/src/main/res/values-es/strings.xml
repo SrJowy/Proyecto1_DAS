@@ -27,4 +27,8 @@
     <string name="do_action_menu">Menú acción</string>
     <string name="remove">Eliminar</string>
     <string name="exit">SALIR</string>
+    <string name="notif_title_alert">Alerta</string>
+    <string name="notif_msg_alert">Se ha eliminado una rutina</string>
+    <string name="notif_data_changes">Cambios en tus datos</string>
+    <string name="add_exercise">Añadir ejercicios</string>
 </resources>

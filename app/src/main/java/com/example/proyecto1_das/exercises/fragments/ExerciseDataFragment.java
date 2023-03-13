@@ -1,5 +1,7 @@
 package com.example.proyecto1_das.exercises.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.data.Exercise;
 import com.example.proyecto1_das.db.MyDB;
+import com.example.proyecto1_das.utils.LocaleUtils;
 
 import java.util.List;
 
@@ -38,7 +42,9 @@ public class ExerciseDataFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MyDB myDB = new MyDB(getContext());
-        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID);
+        String lang = LocaleUtils.getLanguage(getContext());
+        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID, lang);
+        myDB.close();
         if (!lEx.isEmpty()) {
             Exercise e = lEx.get(0);
             TextView tExName = getView().findViewById(R.id.exName);
@@ -55,6 +61,13 @@ public class ExerciseDataFragment extends Fragment {
 
             TextView tKgs = getView().findViewById(R.id.exKGs);
             tKgs.setText(Double.toString(e.getNumKgs()));
+
+            Button b = getView().findViewById(R.id.moreinfobutton);
+            b.setOnClickListener(c -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(e.getLink()));
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                startActivity(intent);
+            });
 
             setImage(exID);
         }
@@ -66,8 +79,9 @@ public class ExerciseDataFragment extends Fragment {
 
     public void setData2(int exID) {
         MyDB myDB = new MyDB(getContext());
-        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID);
-        Log.i("EDF", "setData2: " + exID);
+        String lang = LocaleUtils.getLanguage(getContext());
+        List<Exercise> lEx = myDB.selectExerciseByExerciseID(exID, lang);
+        myDB.close();
         if (!lEx.isEmpty()) {
             Exercise e = lEx.get(0);
             TextView tExName = getView().findViewById(R.id.exName);
@@ -84,6 +98,13 @@ public class ExerciseDataFragment extends Fragment {
 
             TextView tKgs = getView().findViewById(R.id.exKGs);
             tKgs.setText(Double.toString(e.getNumKgs()));
+
+            Button b = getView().findViewById(R.id.moreinfobutton);
+            b.setOnClickListener(c -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(e.getLink()));
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                startActivity(intent);
+            });
 
             setImage(exID);
         }

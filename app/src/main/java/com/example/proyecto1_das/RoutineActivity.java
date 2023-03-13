@@ -139,7 +139,7 @@ public class RoutineActivity extends AppCompatActivity implements NavigationView
 
             if (success) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }
@@ -152,20 +152,20 @@ public class RoutineActivity extends AppCompatActivity implements NavigationView
             addDataToList();
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder elBuilder = new NotificationCompat.Builder(this, "IdCanal");
-            NotificationChannel elCanal = new NotificationChannel("IdCanal", "NombreCanal",
+            NotificationChannel elCanal = new NotificationChannel("pock_rout", "Pocket Routine Notifications",
                     NotificationManager.IMPORTANCE_DEFAULT);
             elManager.createNotificationChannel(elCanal);
 
-            elCanal.setDescription("Descripción del canal");
+            elCanal.setDescription("Notifications of your routine app");
             elCanal.enableLights(true);
             elCanal.setLightColor(Color.RED);
             elCanal.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             elCanal.enableVibration(true);
 
             elBuilder.setSmallIcon(android.R.drawable.stat_sys_warning)
-                    .setContentTitle("Mensaje de Alerta")
-                    .setContentText("Ejemplo de notificación en DAS.")
-                    .setSubText("Información extra")
+                    .setContentTitle(getString(R.string.notif_title_alert))
+                    .setContentText(getString(R.string.notif_msg_alert))
+                    .setSubText(getString(R.string.notif_data_changes))
                     .setVibrate(new long[]{0, 1000, 500, 1000})
                     .setAutoCancel(true);
 

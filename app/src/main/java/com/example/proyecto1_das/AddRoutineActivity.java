@@ -10,12 +10,14 @@ import android.widget.EditText;
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.dialog.MessageDialog;
 import com.example.proyecto1_das.utils.FileUtils;
+import com.example.proyecto1_das.utils.LocaleUtils;
 
 public class AddRoutineActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleUtils.initialize(this);
         setContentView(R.layout.activity_add_routine);
 
         Button b = findViewById(R.id.buttonSaveRoutine);

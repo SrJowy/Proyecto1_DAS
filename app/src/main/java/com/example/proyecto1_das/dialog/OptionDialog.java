@@ -68,6 +68,13 @@ public class OptionDialog extends DialogFragment {
                         myDB.close();
                         listener.onDialogRes("00");
                     }
+                } else if (optionId == 1) {
+                    if (i == 0) {
+                        MyDB myDB = new MyDB(getContext());
+                        myDB.removeRoutineEx(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                        myDB.close();
+                        listener.onDialogRes("00");
+                    }
                 }
             });
             builder.setNegativeButton(getString(R.string.exit), (dialogInterface, i) -> {

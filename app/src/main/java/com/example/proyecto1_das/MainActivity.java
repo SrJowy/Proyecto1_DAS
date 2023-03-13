@@ -42,30 +42,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MyDB dbManager = new MyDB(this);
         /*dbManager.insertUsr("joelbraortiz@gmail.com", "12345");
-        dbManager.insertExercises("Press de banca", "", 4, 12, 60.0, "");
-        dbManager.insertExercises("Tríceps con cuerda", "Realízalo con una polea", 4, 12, 15, "");
-        dbManager.insertExercises("Press de banca inclinado 45º", "Lo puedes hacer con barra o mancuernas", 4, 10, 15, "");
+        dbManager.insertExercises(1,"Press de banca", "", 4, 12, 60.0, "https://musclewiki.com/barbell/male/chest/barbell-bench-press", "es");
+        dbManager.insertExercises(2,"Tríceps con cuerda", "Realízalo con una polea", 4, 12, 15, "https://musclewiki.com/cables/male/triceps/cable-push-down", "es");
+        dbManager.insertExercises(3,"Press de banca inclinado 45º", "Lo puedes hacer con barra o mancuernas", 4, 10, 15, "https://musclewiki.com/dumbbells/male/chest/dumbbell-incline-bench-press", "es");
+        dbManager.insertExercises(1,"Bench press", "", 4, 12, 60.0, "https://musclewiki.com/barbell/male/chest/barbell-bench-press", "en");
+        dbManager.insertExercises(2,"Triceps extension", "Do it using a pulley", 4, 12, 15, "https://musclewiki.com/cables/male/triceps/cable-push-down", "en");
+        dbManager.insertExercises(3,"Incline bench press", "Do it using dumbbells or a bar", 4, 10, 15, "https://musclewiki.com/dumbbells/male/chest/dumbbell-incline-bench-press", "en");
         dbManager.insertRoutine("joelbraortiz@gmail.com", "Rutina de empuje");
         dbManager.insertEjRoutine(1,1);
         dbManager.insertEjRoutine(1,2);
         dbManager.insertEjRoutine(1,3);*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Log.i("and", "onCreate: 1" );
             if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) !=
                     PackageManager.PERMISSION_GRANTED) {
-                Log.i("and", "onCreate: 2" );
                 ActivityCompat.requestPermissions(this, new
                         String[]{POST_NOTIFICATIONS}, 11);
             }
         }
 
-
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {
             dbManager.close();
             Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
             startActivity(intent);
         }
 
@@ -83,13 +83,10 @@ public class MainActivity extends AppCompatActivity {
             dbManager.close();
 
             if (exists) {
-                Random rand = new Random();
-                int num = rand.nextInt(900000) + 100000;
-
                 saveSession(mail);
 
                 Intent i = new Intent(this, RoutineActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
             }
 
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             outputStreamWriter.close();
         }
         catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
+            Log.e("Exception", "File write failed: " + e);
         }
     }
 }

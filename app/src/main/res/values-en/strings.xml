@@ -27,4 +27,8 @@
     <string name="do_action_menu">Action menu</string>
     <string name="remove">Remove</string>
     <string name="exit">EXIT</string>
+    <string name="notif_title_alert">Alert</string>
+    <string name="notif_msg_alert">A routine has been removed</string>
+    <string name="notif_data_changes">Data changes</string>
+    <string name="add_exercise">Add exercises</string>
 </resources>
