@@ -22,7 +22,7 @@ public class Preferences extends PreferenceFragmentCompat
 
     public interface PrefListener {
         void changeLang(String lang);
-        void changeTheme();
+        void changeTheme(String theme);
     }
 
     private PrefListener prefListener;
@@ -43,7 +43,7 @@ public class Preferences extends PreferenceFragmentCompat
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         switch (s) {
             case "theme":
-                prefListener.changeTheme();
+                prefListener.changeTheme(sharedPreferences.getString(s,"light"));
                 break;
             case "lang":
                 prefListener.changeLang(sharedPreferences.getString(s,"en"));

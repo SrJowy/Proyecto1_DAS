@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Proyecto1_DAS</string>
     <string name="sign_in">Sign In</string>
     <string name="user_id">User:</string>
     <string name="pass_id">Password:</string>
@@ -31,4 +30,7 @@
     <string name="notif_msg_alert">A routine has been removed</string>
     <string name="notif_data_changes">Data changes</string>
     <string name="add_exercise">Add exercises</string>
+    <string name="select_language">Select language</string>
+    <string name="lang_es">Spanish</string>
+    <string name="lang_en">English</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_drawer_layout"
+    android:backgroundTint="?attr/colorBackgroundFloating"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
@@ -14,6 +15,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/navigation_menu"
+        android:background="?attr/colorTertiary"
         android:id="@+id/nav_menu"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

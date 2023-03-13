@@ -3,6 +3,8 @@ package com.example.proyecto1_das;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
@@ -19,6 +21,7 @@ import android.widget.ListView;
 import com.example.proyecto1_das.dialog.OptionDialog;
 import com.example.proyecto1_das.preferences.Preferences;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.example.proyecto1_das.utils.ThemeUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -32,15 +35,18 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleUtils.initialize(getBaseContext());
-        setContentView(R.layout.activity_options);
+        ThemeUtils.changeTheme(this);
+        ThemeUtils.changeActionBar(this);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_pref, new Preferences())
                 .commit();
+        setContentView(R.layout.activity_options);
+
 
 
         DrawerLayout d = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
-
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
         d.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -59,9 +65,13 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
     }
 
     @Override
-    public void changeTheme() {
-
+    public void changeTheme(String theme) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

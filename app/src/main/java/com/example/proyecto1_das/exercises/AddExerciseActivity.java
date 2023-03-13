@@ -14,6 +14,7 @@ import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.data.Exercise;
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.example.proyecto1_das.utils.ThemeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,8 @@ public class AddExerciseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleUtils.initialize(this);
+        ThemeUtils.changeTheme(this);
+        ThemeUtils.changeActionBar(this);
         setContentView(R.layout.activity_add_exercise);
 
         Bundle bundle = getIntent().getExtras();

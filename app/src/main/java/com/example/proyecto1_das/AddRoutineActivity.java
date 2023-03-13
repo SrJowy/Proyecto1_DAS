@@ -11,6 +11,7 @@ import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.dialog.MessageDialog;
 import com.example.proyecto1_das.utils.FileUtils;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.example.proyecto1_das.utils.ThemeUtils;
 
 public class AddRoutineActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class AddRoutineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleUtils.initialize(this);
+        ThemeUtils.changeTheme(this);
+        ThemeUtils.changeActionBar(this);
         setContentView(R.layout.activity_add_routine);
 
         Button b = findViewById(R.id.buttonSaveRoutine);

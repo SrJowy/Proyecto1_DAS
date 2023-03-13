@@ -22,6 +22,7 @@ import android.widget.EditText;
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.utils.FileUtils;
 import com.example.proyecto1_das.utils.LocaleUtils;
+import com.example.proyecto1_das.utils.ThemeUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                         String[]{POST_NOTIFICATIONS}, 11);
             }
         }
-
+        ThemeUtils.changeTheme(this);
+        ThemeUtils.changeActionBar(this);
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {
             dbManager.close();

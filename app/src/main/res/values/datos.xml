@@ -9,8 +9,8 @@
         <item>dark</item>
     </string-array>
     <string-array name="languages">
-        <item>Spanish</item>
-        <item>English</item>
+        <item>@string/lang_es</item>
+        <item>@string/lang_en</item>
     </string-array>
     <string-array name="languages_codes">
         <item>es</item>

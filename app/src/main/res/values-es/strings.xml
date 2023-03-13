@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Proyecto1_DAS</string>
     <string name="sign_in">Iniciar Sesión</string>
     <string name="user_id">Usuario:</string>
     <string name="pass_id">Contraseña:</string>
@@ -31,4 +30,7 @@
     <string name="notif_msg_alert">Se ha eliminado una rutina</string>
     <string name="notif_data_changes">Cambios en tus datos</string>
     <string name="add_exercise">Añadir ejercicios</string>
+    <string name="select_language">Elige el idioma</string>
+    <string name="lang_es">Español</string>
+    <string name="lang_en">Inglés</string>
 </resources>

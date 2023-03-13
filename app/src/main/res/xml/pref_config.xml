@@ -13,7 +13,7 @@
         <ListPreference
             app:key="lang"
             app:title="@string/Language"
-            app:dialogTitle="Choose your language:"
+            app:dialogTitle="@string/select_language"
             app:entries="@array/languages"
             app:entryValues="@array/languages_codes"/>
     </PreferenceCategory>
