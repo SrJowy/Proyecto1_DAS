@@ -2,7 +2,7 @@
 <resources>
     <string name="sign_in">Sign In</string>
     <string name="user_id">User:</string>
-    <string name="pass_id">Password:</string>
+    <string name="pass_id">Password</string>
     <string name="accept">Accept</string>
     <string name="main_routines">Routines</string>
     <string name="Exercises">Exercises</string>
@@ -33,4 +33,5 @@
     <string name="select_language">Select language</string>
     <string name="lang_es">Spanish</string>
     <string name="lang_en">English</string>
+    <string name="sign_up">Sign up</string>
 </resources>

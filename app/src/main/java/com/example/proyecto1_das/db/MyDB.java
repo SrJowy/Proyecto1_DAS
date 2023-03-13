@@ -40,7 +40,38 @@ public class MyDB extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_USUARIOS);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_EX);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_EJS_ROUT);
-
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{1,"Press de banca", "", 4, 12, 60.0,
+                "https://musclewiki.com/barbell/male/chest/barbell-bench-press", "es"});
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                        "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{2,"Tríceps con cuerda", "Realízalo con una polea", 4, 12, 15,
+                        "https://musclewiki.com/cables/male/triceps/cable-push-down", "es"});
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                        "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{3,"Press de banca inclinado 45º", "Lo puedes hacer con barra o mancuernas",
+                        4, 10, 15, "https://musclewiki.com/dumbbells/male/chest/dumbbell-incline-bench-press", "es"});
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                        "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{1,"Bench press", "", 4, 12, 60.0,
+                        "https://musclewiki.com/barbell/male/chest/barbell-bench-press", "en"});
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                        "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{2,"Triceps extension", "Do it using a pulley", 4, 12, 15,
+                        "https://musclewiki.com/cables/male/triceps/cable-push-down", "en"});
+        sqLiteDatabase.execSQL("INSERT INTO EXERCISES " +
+                        "(ID, NAME, DES, NUM_SERIES, NUM_REPS, KG, LINK, LANG) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{3,"Incline bench press", "Do it using dumbbells or a bar", 4, 10, 15,
+                        "https://musclewiki.com/dumbbells/male/chest/dumbbell-incline-bench-press", "en"});
+        sqLiteDatabase.execSQL("INSERT INTO USERS (MAIL, PASSWORD) VALUES (?, ?)",
+                new Object[]{"admin@gmail.com", "admin"});
     }
 
     @Override

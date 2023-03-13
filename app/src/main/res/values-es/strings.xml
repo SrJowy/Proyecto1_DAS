@@ -2,7 +2,7 @@
 <resources>
     <string name="sign_in">Iniciar Sesión</string>
     <string name="user_id">Usuario:</string>
-    <string name="pass_id">Contraseña:</string>
+    <string name="pass_id">Contraseña</string>
     <string name="accept">Aceptar</string>
     <string name="main_routines">Rutinas</string>
     <string name="Exercises">Ejercicios</string>
@@ -33,4 +33,5 @@
     <string name="select_language">Elige el idioma</string>
     <string name="lang_es">Español</string>
     <string name="lang_en">Inglés</string>
+    <string name="sign_up">Registro</string>
 </resources>

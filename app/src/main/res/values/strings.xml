@@ -2,8 +2,8 @@
     <string name="app_name" translatable="false">Pocket Routine</string>
     <string name="sign_in">Sign In</string>
     <string name="user_id">User:</string>
-    <string name="pass_id">Password:</string>
-    <string name="mail" translatable="false">mail@domain.com</string>
+    <string name="pass_id">Password</string>
+    <string name="mail" translatable="false">E-mail</string>
     <string name="accept">Accept</string>
     <string name="nav_open" translatable="false">Open</string>
     <string name="nav_close" translatable="false">Close</string>
@@ -38,5 +38,6 @@
     <string name="select_language">Select language:</string>
     <string name="lang_es">Spanish</string>
     <string name="lang_en">English</string>
+    <string name="sign_up">Sign up</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
