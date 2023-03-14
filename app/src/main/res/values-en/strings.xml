@@ -26,7 +26,6 @@
     <string name="do_action_menu">Action menu</string>
     <string name="remove">Remove</string>
     <string name="exit">EXIT</string>
-    <string name="notif_title_alert">Alert</string>
     <string name="notif_msg_alert">A routine has been removed</string>
     <string name="notif_data_changes">Data changes</string>
     <string name="add_exercise">Add exercises</string>
@@ -34,4 +33,17 @@
     <string name="lang_es">Spanish</string>
     <string name="lang_en">English</string>
     <string name="sign_up">Sign up</string>
+    <string name="notif_title_alert">Alert</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="repeat_pass">Repeat password</string>
+    <string name="send">Send</string>
+    <string name="usr_msg">User length cannot be longer than 255 characters</string>
+    <string name="surname_msg">Surname length cannot be longer than 255 characters</string>
+    <string name="mail_msg">Write a valid e-mail</string>
+    <string name="pass_msg">Both passwords must have a minimum length of 8 characters and they must be equal</string>
+    <string name="success">SUCCESS</string>
+    <string name="msg_success">Sign up successful</string>
+    <string name="msg_sign_in">E-mail or password not correct</string>
+    <string name="msg_user_exists">User already registered</string>
 </resources>

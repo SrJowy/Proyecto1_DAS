@@ -34,4 +34,16 @@
     <string name="lang_es">Español</string>
     <string name="lang_en">Inglés</string>
     <string name="sign_up">Registro</string>
+    <string name="name">Nombre</string>
+    <string name="surname">Apellido</string>
+    <string name="repeat_pass">Repite contraseña</string>
+    <string name="send">Enviar</string>
+    <string name="usr_msg">El nombre no puede ser más largo de 255 caracteres</string>
+    <string name="surname_msg">El apellido no puede ser más largo de 255 caracteres</string>
+    <string name="mail_msg">Escribe un e-mail válido</string>
+    <string name="pass_msg">Las dos contraseñas deben ser iguales y su longitud mínima debe ser de 8 caracteres</string>
+    <string name="success">ÉXITO</string>
+    <string name="msg_success">Éxito al registrarse</string>
+    <string name="msg_sign_in">E-mail o contraseña incorrectos</string>
+    <string name="msg_user_exists">Usuario ya registrado</string>
 </resources>

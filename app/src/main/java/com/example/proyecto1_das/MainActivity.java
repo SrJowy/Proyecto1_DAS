@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.proyecto1_das.db.MyDB;
+import com.example.proyecto1_das.dialog.MessageDialog;
 import com.example.proyecto1_das.utils.FileUtils;
 import com.example.proyecto1_das.utils.LocaleUtils;
 import com.example.proyecto1_das.utils.ThemeUtils;
@@ -90,8 +91,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(this, RoutineActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
+            } else {
+                MessageDialog d = new MessageDialog("ERROR", getString(R.string.msg_sign_in));
+                d.show(getSupportFragmentManager(), "errorDialog");
             }
 
+        });
+
+        Button bRegister = findViewById(R.id.button2);
+        bRegister.setOnClickListener(c -> {
+            Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
         });
 
     }

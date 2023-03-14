@@ -22,7 +22,7 @@ public class MyDB extends SQLiteOpenHelper {
             "CREATE TABLE ROUTINES ('ID' INTEGER PRIMARY KEY AUTOINCREMENT, 'MAIL' VARCHAR(255), 'DESCRIPTION' TEXT, FOREIGN KEY (MAIL) REFERENCES USERS(MAIL), UNIQUE (ID, MAIL))";
 
     private static final String SQL_CREATE_TABLE_USUARIOS =
-            "CREATE TABLE USERS ('MAIL' VARCHAR(255) PRIMARY KEY NOT NULL, 'PASSWORD' VARCHAR(255))";
+            "CREATE TABLE USERS ('MAIL' VARCHAR(255) PRIMARY KEY NOT NULL, 'PASSWORD' VARCHAR(255), 'NAME' VARCHAR(255), 'SURNAME' VARCHAR(255))";
 
     private static final String SQL_CREATE_TABLE_EX =
             "CREATE TABLE EXERCISES (ID INTEGER NOT NULL,NAME TEXT,DES TEXT,NUM_SERIES INTEGER,NUM_REPS INTEGER,KG REAL,LINK TEXT, LANG VARCHAR(2), PRIMARY KEY(ID, NAME))";
@@ -70,8 +70,8 @@ public class MyDB extends SQLiteOpenHelper {
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 new Object[]{3,"Incline bench press", "Do it using dumbbells or a bar", 4, 10, 15,
                         "https://musclewiki.com/dumbbells/male/chest/dumbbell-incline-bench-press", "en"});
-        sqLiteDatabase.execSQL("INSERT INTO USERS (MAIL, PASSWORD) VALUES (?, ?)",
-                new Object[]{"admin@gmail.com", "admin"});
+        sqLiteDatabase.execSQL("INSERT INTO USERS (MAIL, PASSWORD, NAME, SURNAME) VALUES (?, ?, ?, ?)",
+                new Object[]{"admin@gmail.com", "admin123", "admin", "admin"});
     }
 
     @Override
@@ -110,11 +110,11 @@ public class MyDB extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertUsr(String usr, String pass) {
+    public void insertUsr(String usr, String pass, String name, String surname) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO USERS (MAIL, PASSWORD) VALUES (?, ?)";
+        String sql = "INSERT INTO USERS (MAIL, PASSWORD, NAME, SURNAME) VALUES (?, ?, ?, ?)";
         try {
-            db.execSQL(sql, new Object[]{usr, pass});
+            db.execSQL(sql, new Object[]{usr, pass, name, surname});
         } catch (SQLException e) {
             Log.e("INSERT_ERROR", "insertUsr: That user already exists ", e);
         }
@@ -249,4 +249,16 @@ public class MyDB extends SQLiteOpenHelper {
         return lEx;
     }
 
+    public int userExistInDB(String mail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM USERS WHERE MAIL == ?";
+        Cursor cursor = db.rawQuery(query, new String[] {mail});
+
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+
+        return count;
+    }
 }
