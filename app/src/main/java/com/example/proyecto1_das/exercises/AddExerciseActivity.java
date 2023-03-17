@@ -1,14 +1,11 @@
 package com.example.proyecto1_das.exercises;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto1_das.R;
 import com.example.proyecto1_das.data.Exercise;
@@ -46,7 +43,8 @@ public class AddExerciseActivity extends AppCompatActivity {
         myDB.close();
 
         lEx = new ArrayList<>();
-        List<Exercise> lExercisesFiltered = checkExercisesInRoutine(rID, lang, lExercises);
+        List<Exercise> lExercisesFiltered =
+                checkExercisesInRoutine(rID, lang, lExercises);
         for (Exercise e : lExercisesFiltered) {
             String exName = e.getName();
             lEx.add(exName);
@@ -55,14 +53,19 @@ public class AddExerciseActivity extends AppCompatActivity {
         Arrays.fill(selectedEx, Boolean.FALSE);
 
         ListView lv = findViewById(R.id.exList);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lEx);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lEx);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
             if (!selectedEx[i]) {
-                view.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.abc_tint_default, getTheme()));
+                view.setBackgroundColor(getResources()
+                        .getColor(com.google.android.material.R.color.abc_tint_default,
+                                getTheme()));
                 selectedEx[i] = true;
             } else {
-                view.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.cardview_shadow_end_color, getTheme()));
+                view.setBackgroundColor(
+                        getResources().getColor(com.google.android.material.
+                                R.color.cardview_shadow_end_color, getTheme()));
                 selectedEx[i] = false;
             }
 
@@ -73,7 +76,8 @@ public class AddExerciseActivity extends AppCompatActivity {
             for (int i = 0; i < lExercisesFiltered.size(); i++) {
                 if (selectedEx[i]) {
                     MyDB db = new MyDB(this);
-                    db.insertEjRoutine(Integer.parseInt(rID), lExercisesFiltered.get(i).getId());
+                    db.insertEjRoutine(Integer.parseInt(rID),
+                            lExercisesFiltered.get(i).getId());
                     db.close();
                     setResult(RESULT_OK);
                     finish();
@@ -82,12 +86,14 @@ public class AddExerciseActivity extends AppCompatActivity {
         });
     }
 
-    private List<Exercise> checkExercisesInRoutine(String rID, String lang, List<Exercise> lExercises) {
+    private List<Exercise> checkExercisesInRoutine(String rID, String lang,
+                                                   List<Exercise> lExercises) {
         MyDB db = new MyDB(this);
         List<Exercise> lExercisesInRoutine = db.selectExercisesByRoutineID(rID, lang);
         db.close();
         List<Exercise> elsToRemove = lExercises.stream()
-                .filter(p1 -> lExercisesInRoutine.stream().anyMatch(p2 -> p1.getId() == p2.getId()))
+                .filter(p1 -> lExercisesInRoutine.stream()
+                        .anyMatch(p2 -> p1.getId() == p2.getId()))
                 .collect(Collectors.toList());
 
         lExercises.removeAll(elsToRemove);

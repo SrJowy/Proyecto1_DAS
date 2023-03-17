@@ -1,52 +1,41 @@
 package com.example.proyecto1_das;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.example.proyecto1_das.dialog.OptionDialog;
 import com.example.proyecto1_das.preferences.Preferences;
 import com.example.proyecto1_das.utils.LocaleUtils;
 import com.example.proyecto1_das.utils.ThemeUtils;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-public class OptionsActivity extends AppCompatActivity implements Preferences.PrefListener, NavigationView.OnNavigationItemSelectedListener{
+public class OptionsActivity extends AppCompatActivity implements
+        Preferences.PrefListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleUtils.initialize(getBaseContext());
         ThemeUtils.changeTheme(this);
         ThemeUtils.changeActionBar(this);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_pref, new Preferences())
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_pref,
+                new Preferences()).commit();
         setContentView(R.layout.activity_options);
 
 
-
         DrawerLayout d = findViewById(R.id.my_drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
-        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open,
+                R.string.nav_close);
+        actionBarDrawerToggle.getDrawerArrowDrawable()
+                .setColor(ContextCompat.getColor(this, R.color.white));
         d.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -72,7 +61,6 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -92,7 +80,8 @@ public class OptionsActivity extends AppCompatActivity implements Preferences.Pr
 
             if (success) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }

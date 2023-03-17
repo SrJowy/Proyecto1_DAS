@@ -29,7 +29,8 @@ public class OptionDialog extends DialogFragment {
     private boolean hasChoices;
     private String[] args;
 
-    public OptionDialog(String title, CharSequence[] elements, int optionId, boolean hasChoices, String[] args) {
+    public OptionDialog(String title, CharSequence[] elements, int optionId,
+                        boolean hasChoices, String[] args) {
         this.title = title;
         this.elements = elements;
         this.optionId = optionId;
@@ -47,7 +48,8 @@ public class OptionDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         if (hasChoices) {
-            builder.setSingleChoiceItems(elements, -1, (dialogInterface, i) -> {
+            builder.setSingleChoiceItems(elements, -1,
+                    (dialogInterface, i) -> {
                 if (optionId == 0) {
                     if (i == 0) {
 
@@ -71,7 +73,8 @@ public class OptionDialog extends DialogFragment {
                 } else if (optionId == 1) {
                     if (i == 0) {
                         MyDB myDB = new MyDB(getContext());
-                        myDB.removeRoutineEx(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                        myDB.removeRoutineEx(Integer.parseInt(args[0]),
+                                Integer.parseInt(args[1]));
                         myDB.close();
                         listener.onDialogRes("00");
                     }

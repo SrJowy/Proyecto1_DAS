@@ -1,11 +1,10 @@
 package com.example.proyecto1_das;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.dialog.MessageDialog;

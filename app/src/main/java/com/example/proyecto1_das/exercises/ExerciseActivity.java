@@ -27,8 +27,9 @@ import com.example.proyecto1_das.utils.ThemeUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.listenerViewHolder,
-        NavigationView.OnNavigationItemSelectedListener, OptionDialog.DialogListener {
+public class ExerciseActivity extends AppCompatActivity implements
+        MyViewHolder.listenerViewHolder, NavigationView.OnNavigationItemSelectedListener,
+        OptionDialog.DialogListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -55,8 +56,10 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
         }
 
         DrawerLayout d = findViewById(R.id.my_drawer_layout2);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
-        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
+        actionBarDrawerToggle =
+                new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
+        actionBarDrawerToggle.getDrawerArrowDrawable()
+                .setColor(ContextCompat.getColor(this, R.color.white));
         d.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -64,7 +67,8 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            ExerciseDataFragment eFragment = (ExerciseDataFragment) getSupportFragmentManager()
+            ExerciseDataFragment eFragment =
+                    (ExerciseDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragmentContainerView3);
             getSupportFragmentManager().beginTransaction().hide(eFragment).commit();
         }
@@ -104,7 +108,8 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
     public void selectItem(int exID) {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            ExerciseDataFragment eFragment = (ExerciseDataFragment) getSupportFragmentManager()
+            ExerciseDataFragment eFragment =
+                    (ExerciseDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragmentContainerView3);
             if (!eFragment.isVisible()) {
                 getSupportFragmentManager().beginTransaction().show(eFragment).commit();
@@ -121,7 +126,8 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
     public void showActivityInfo(int exID) {
         CharSequence[] options = {getString(R.string.remove)};
         String[] args = {rID, Integer.toString(exID)};
-        OptionDialog dialogOption = new OptionDialog(getString(R.string.do_action_menu),options, 1, false, args);
+        OptionDialog dialogOption =
+                new OptionDialog(getString(R.string.do_action_menu),options, 1, false, args);
         dialogOption.setListener(this);
         dialogOption.show(getSupportFragmentManager(), "dialogExercise");
     }
@@ -145,7 +151,8 @@ public class ExerciseActivity extends AppCompatActivity implements MyViewHolder.
 
             if (success) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }

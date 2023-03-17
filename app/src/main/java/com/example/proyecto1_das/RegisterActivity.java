@@ -1,12 +1,11 @@
 package com.example.proyecto1_das;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.os.Message;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto1_das.db.MyDB;
 import com.example.proyecto1_das.dialog.MessageDialog;
@@ -42,14 +41,16 @@ public class RegisterActivity extends AppCompatActivity {
             String repeatPass = etRepPassword.getText().toString();
 
             try {
-                ValidationUtils.validateUsr(new String[] {name, surname, mail, password, repeatPass});
+                ValidationUtils.validateUsr(new String[]{name, surname, mail, password,
+                        repeatPass});
                 MyDB myDB = new MyDB(this);
                 if (myDB.userExistInDB(mail) == 1) {
                     throw new Exception("exists");
                 }
                 myDB.insertUsr(mail, password, name, surname);
                 myDB.close();
-                Toast.makeText(this, getString(R.string.msg_success), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.msg_success),
+                        Toast.LENGTH_LONG).show();
                 finish();
             } catch (Exception e) {
                 String message = "";

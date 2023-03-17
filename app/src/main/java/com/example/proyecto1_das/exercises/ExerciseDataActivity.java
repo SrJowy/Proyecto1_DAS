@@ -1,15 +1,14 @@
 package com.example.proyecto1_das.exercises;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.proyecto1_das.MainActivity;
 import com.example.proyecto1_das.OptionsActivity;
@@ -19,7 +18,8 @@ import com.example.proyecto1_das.utils.LocaleUtils;
 import com.example.proyecto1_das.utils.ThemeUtils;
 import com.google.android.material.navigation.NavigationView;
 
-public class ExerciseDataActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ExerciseDataActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -32,8 +32,10 @@ public class ExerciseDataActivity extends AppCompatActivity implements Navigatio
         setContentView(R.layout.activity_exercise_data);
 
         DrawerLayout d = findViewById(R.id.my_drawer_layout3);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open, R.string.nav_close);
-        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, d, R.string.nav_open,
+                R.string.nav_close);
+        actionBarDrawerToggle.getDrawerArrowDrawable()
+                .setColor(ContextCompat.getColor(this, R.color.white));
         d.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -43,7 +45,8 @@ public class ExerciseDataActivity extends AppCompatActivity implements Navigatio
         if (extras != null) {
             int exID = extras.getInt("ExID");
 
-            ExerciseDataFragment eFragment = (ExerciseDataFragment) getSupportFragmentManager()
+            ExerciseDataFragment eFragment =
+                    (ExerciseDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.fragmentContainerView2);
 
             eFragment.setData(exID);
@@ -74,7 +77,8 @@ public class ExerciseDataActivity extends AppCompatActivity implements Navigatio
 
             if (success) {
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }

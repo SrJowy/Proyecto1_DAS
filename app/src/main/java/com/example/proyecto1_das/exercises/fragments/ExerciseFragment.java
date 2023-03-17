@@ -48,7 +48,8 @@ public class ExerciseFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(lExercises));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(lExercises,
+                    getContext()));
         }
         return view;
     }

@@ -2,12 +2,7 @@ package com.example.proyecto1_das.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,18 +10,12 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.proyecto1_das.R;
 
-import java.util.Locale;
+import java.util.Objects;
 
 public class Preferences extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public interface PrefListener {
-        void changeLang(String lang);
-        void changeTheme(String theme);
-    }
-
     private PrefListener prefListener;
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -35,7 +24,8 @@ public class Preferences extends PreferenceFragmentCompat
     }
 
     @Override
-    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState,
+                                    @Nullable String rootKey) {
         addPreferencesFromResource(R.xml.pref_config);
     }
 
@@ -43,10 +33,10 @@ public class Preferences extends PreferenceFragmentCompat
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         switch (s) {
             case "theme":
-                prefListener.changeTheme(sharedPreferences.getString(s,"light"));
+                prefListener.changeTheme(sharedPreferences.getString(s, "light"));
                 break;
             case "lang":
-                prefListener.changeLang(sharedPreferences.getString(s,"en"));
+                prefListener.changeLang(sharedPreferences.getString(s, "en"));
                 break;
         }
     }
@@ -54,12 +44,22 @@ public class Preferences extends PreferenceFragmentCompat
     @Override
     public void onResume() {
         super.onResume();
-        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        Objects.requireNonNull(getPreferenceManager()
+                .getSharedPreferences())
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        Objects.requireNonNull(getPreferenceManager()
+                .getSharedPreferences())
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    public interface PrefListener {
+        void changeLang(String lang);
+
+        void changeTheme(String theme);
     }
 }
