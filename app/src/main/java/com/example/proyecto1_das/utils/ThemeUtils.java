@@ -61,12 +61,18 @@ public class ThemeUtils {
 
     public static void initAppTheme(Context context) {
         String theme = "light";
-        Log.i("THEME", "initAppTheme: " + theme);
+        int nightModeFlags = context.getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            theme = "dark";
+        }
         SharedPreferences sharedPreferences = context.getSharedPreferences(
                 "com.example.proyecto1_das_preferences",
                 Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("theme", theme);
-        editor.apply();
+        if (!sharedPreferences.contains("theme")) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("theme", theme);
+            editor.apply();
+        }
     }
 }

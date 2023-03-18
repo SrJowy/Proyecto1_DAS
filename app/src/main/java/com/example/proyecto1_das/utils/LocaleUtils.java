@@ -38,8 +38,10 @@ public class LocaleUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
                 "com.example.proyecto1_das_preferences",
                 Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("lang", lang);
-        editor.apply();
+        if (!sharedPreferences.contains("lang")) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("lang", lang);
+            editor.apply();
+        }
     }
 }
