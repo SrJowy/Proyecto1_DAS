@@ -19,7 +19,10 @@ public class FileUtils {
             return true;
         }
     }
-
+    /*
+     * Code extracted and adapted from StackOverflow (User: Iarsaars)
+     * https://stackoverflow.com/questions/14376807/read-write-string-from-to-a-file-in-android
+     */
     public String readFile(Context context, String file) {
         String ret = "";
 

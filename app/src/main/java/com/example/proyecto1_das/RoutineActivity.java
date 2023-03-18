@@ -58,6 +58,11 @@ public class RoutineActivity extends AppCompatActivity implements
 
         addDataToList();
 
+        /*
+         * Set up hamburger menu
+         * Code extracted and adapted from GeeksforGeeks
+         * https://www.geeksforgeeks.org/navigation-drawer-in-android/
+         */
         DrawerLayout d = findViewById(R.id.my_drawer_layout);
 
         actionBarDrawerToggle =
@@ -75,6 +80,7 @@ public class RoutineActivity extends AppCompatActivity implements
         n.bringToFront();
         n.setNavigationItemSelectedListener(this);
 
+        // Set up + button action
         FloatingActionButton fButton = findViewById(R.id.floating_button);
         fButton.setOnClickListener(c -> {
             Intent i = new Intent(this, AddRoutineActivity.class);
@@ -97,6 +103,10 @@ public class RoutineActivity extends AppCompatActivity implements
 
     }
 
+    /*
+     * Adds data to the routine list
+     * It is called everytime there is a change in the database
+     */
     private void addDataToList() {
         FileUtils fUtils = new FileUtils();
         String mail = fUtils.readFile(getApplicationContext(), "config.txt");

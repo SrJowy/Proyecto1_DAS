@@ -13,6 +13,9 @@ import com.example.proyecto1_das.data.Routine;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Local database manager class
+ */
 public class MyDB extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "app.db";

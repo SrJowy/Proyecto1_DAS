@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyDB dbManager = new MyDB(this);
 
+        // Ask user for permission to send him notifications
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) !=
                     PackageManager.PERMISSION_GRANTED) {
@@ -41,16 +41,21 @@ public class MainActivity extends AppCompatActivity {
                         String[]{POST_NOTIFICATIONS}, 11);
             }
         }
+        // Initialize theme checking his dark theme preference
         ThemeUtils.initAppTheme(this);
         ThemeUtils.changeTheme(this);
+        // Updates de action bar to include a correct color and the name of the app
         ThemeUtils.changeActionBar(this);
+
+        // Check if the user has an active session
         FileUtils fUtils = new FileUtils();
         if (fUtils.sessionExists(getApplicationContext(), "config.txt")) {
-            dbManager.close();
             Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
-            finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+        // Initialize user's main language in the app
         LocaleUtils.initAppLang(getBaseContext());
         LocaleUtils.initialize(getBaseContext());
         setContentView(R.layout.activity_main);
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             EditText etPassword = findViewById(R.id.editTextPassword);
             String password = etPassword.getText().toString();
 
+            MyDB dbManager = new MyDB(this);
             boolean exists = dbManager.checkUsr(mail, password);
             dbManager.close();
 
@@ -87,7 +93,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    /*
+     * Code extracted and adapted from StackOverflow (User: Iarsaars)
+     * https://stackoverflow.com/questions/14376807/read-write-string-from-to-a-file-in-android
+     */
     private void saveSession(String mail) {
         try {
             OutputStreamWriter outputStreamWriter =
